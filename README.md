@@ -49,7 +49,8 @@
 
 ## Install
 
-**Clone and install**
+**Clone and install**  
+NOTE: If encounter any issues for env setup, please refer to https://github.com/pk00749/CosyVoice_for_MacOs/.
 
 - Clone the repo
 ``` sh
