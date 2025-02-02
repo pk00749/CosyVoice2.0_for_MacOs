@@ -57,8 +57,8 @@ class CosyVoiceFrontEnd:
                                                                                 "CPUExecutionProvider"])
         if os.path.exists(spk2info):
             self.spk2info = torch.load(spk2info, map_location=self.device)
-        # else:
-        #     self.spk2info = {}
+        else:
+            self.spk2info = {}
         self.allowed_special = allowed_special
         self.use_ttsfrd = use_ttsfrd
         if self.use_ttsfrd:
@@ -130,7 +130,7 @@ class CosyVoiceFrontEnd:
             text = ''.join(texts)
         else:
             if contains_chinese(text):
-                # text = self.zh_tn_model.normalize(text)
+                text = self.zh_tn_model.normalize(text)
                 text = text.replace("\n", "")
                 text = replace_blank(text)
                 text = replace_corner_mark(text)
