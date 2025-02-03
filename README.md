@@ -77,6 +77,12 @@ sudo apt-get install sox libsox-dev
 sudo yum install sox sox-devel
 ```
 
+**How to install WeTextProcessing and Pyini**
+```sh
+    conda install -c conda-forge pynini==2.1.5
+    pip install WeTextProcessing==1.0.3
+```
+
 **Model download**
 
 We strongly recommend that you download our pretrained `CosyVoice2-0.5B` `CosyVoice-300M` `CosyVoice-300M-SFT` `CosyVoice-300M-Instruct` model and `CosyVoice-ttsfrd` resource.
