@@ -75,7 +75,7 @@ def tts_to_audio():
         # torchaudio.save(temp_file.name, audio_data, 22050, format="wav")
     # torchaudio.save('./test.wav', audio_data, 22050, format="wav")
     prompt_speech_16k = load_wav('./asset/zero_shot_prompt.wav', 16000)
-    for i, j in enumerate(cosyvoice.inference_instruct2('收到好友从远方寄来的生日礼物，那份意外的惊喜与深深的祝福让我心中充满了甜蜜的快乐，笑容如花儿般绽放。', '用粤语说这句话', prompt_speech_16k, stream=False)):
+    for i, j in enumerate(cosyvoice.inference_instruct2(text, '用粤语说这句话', prompt_speech_16k, stream=False)):
         torchaudio.save('./instruct_{}.wav'.format(i), j['tts_speech'], cosyvoice.sample_rate)
         # def generate():
         #     with open(temp_file.name, 'rb') as f:
