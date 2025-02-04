@@ -37,8 +37,6 @@ def speakers():
 
 @app.route("/tts_to_audio/", methods=['POST'])
 def tts_to_audio():
-    # import speaker_config
-    
     question_data = request.get_json()
     print(question_data)
 
@@ -49,34 +47,23 @@ def tts_to_audio():
         status=400,
         mimetype='application/json'
     )
-    # speaker = speaker_config.speaker
-    # new = speaker_config.new
     
     speaker = question_data.get('speaker')
     if not speaker:
-        # 
         speaker = '中文女'
-
-    # start = time.process_time()
     # output = cosyvoice.inference_sft(text,speaker)
     # output = list(output)[0]
-    # print(output)
-    # end = time.process_time()
-    # print("infer time:", end - start)
 
     # def generate():
     #     buffer = io.BytesIO()
-    #     audio_data = output['tts_speech']
-    #     torchaudio.save(buffer, audio_data, 22050, format="wav")
     #     buffer.seek(0)
     #     yield buffer.read()
-    # with tempfile.NamedTemporaryFile(suffix='.wav', delete=False) as temp_file:
-    # audio_data = output['tts_speech']
-        # torchaudio.save(temp_file.name, audio_data, 22050, format="wav")
-    # torchaudio.save('./test.wav', audio_data, 22050, format="wav")
+    start = time.process_time()
     prompt_speech_16k = load_wav('./asset/zero_shot_prompt.wav', 16000)
     for i, j in enumerate(cosyvoice.inference_instruct2(text, '用粤语说这句话', prompt_speech_16k, stream=False)):
         torchaudio.save('./instruct_{}.wav'.format(i), j['tts_speech'], cosyvoice.sample_rate)
+    end = time.process_time()
+    print("infer time:", end - start)
         # def generate():
         #     with open(temp_file.name, 'rb') as f:
         #         data = f.read(8192)
@@ -86,9 +73,9 @@ def tts_to_audio():
         #     # Clean up the temporary file
         #     os.unlink(temp_file.name)
     # return Response(generate(), mimetype="audio/wav")
-    # return Response("Hello, World!", mimetype="text/plain")
+
     return app.response_class(
-        response=json.dumps({"message": "succes"}),
+        response=json.dumps({"message": "success"}),
         status=200,
         mimetype='application/json'
     )
